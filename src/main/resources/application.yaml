@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: boot-chat
+  ai:
+    openai:
+      api-key: sk-T45A4QvXCKi1wN2isV5DdOWp1QdZZKf9kwUK0J3NmHT6sh4D
+      base-url: https://api.chatanywhere.tech
+      chat:
+        options:
+          model: gpt-4o-mini
+    vectorstore:
+      redis:
+        uri: redis://default:123456@localhost:6379
+  data:
+    redis:
+      password: 123456
+      port: 6379
+      database: 0
+      timeout: 10s
+      repositories:
+        enabled: false
+      lettuce:
+        pool:
+          max-active: 200
+          max-wait: -1ms
+          max-idle: 10
+          min-idle: 0
+  datasource:
+    url: jdbc:mysql://localhost:3306/ai_chat?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: shw123zxc
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.mango.bootchat: info
