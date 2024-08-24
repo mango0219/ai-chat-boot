@@ -100,4 +100,22 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         LoginUserVo loginUserVo = new LoginUserVo(user.getId(), user.getUsername(),encode);
         return loginUserVo;
     }
+
+    /**
+     * @author shihw
+     * @date 2024/8/23 14:41
+     * @return {@link LoginUserVo}
+     * @description 验证Token
+     */
+    @Override
+    public LoginUserVo verifyToken(String token) {
+        log.info("[verifyToken] token:{}", token);
+        Object res = redisTemplate.opsForValue().get(REDIS_PRE+token);
+        if (res == null){
+            String id = Base64Utils.decode(token);
+            SysUser user = sysUserMapper.selectById(id);
+            return new LoginUserVo(user.getId(), user.getUsername(), null);
+        }
+        return null;
+    }
 }

@@ -44,6 +44,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor(redisTemplate))
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/register","/user/login");
+                .excludePathPatterns("/user/register","/user/login","/user/verifyToken");
     }
 }

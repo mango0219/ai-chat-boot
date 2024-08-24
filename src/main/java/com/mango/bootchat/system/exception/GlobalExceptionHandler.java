@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = TokenException.class)
     public Result<String> tokenException(TokenException tokenException){
-        return ResultUtil.fail(tokenException.getMessage());
+        return ResultUtil.fail(ResultUtil.TOKEN_NO,tokenException.getMessage());
     }
 
     /**
@@ -68,7 +68,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public Result<String> exception(Exception exception){
         log.error("[Exception], meessage: {}", exception.getMessage());
-        return ResultUtil.fail("未知异常");
+        return ResultUtil.fail("业务异常");
     }
 
 }

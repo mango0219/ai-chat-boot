@@ -2,6 +2,7 @@ package com.mango.bootchat.system.aop;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.mango.bootchat.system.annotation.NotResponseAdvice;
+import com.mango.bootchat.system.annotation.SuccessMessage;
 import com.mango.bootchat.system.result.Result;
 import com.mango.bootchat.system.result.ResultUtil;
 import org.springframework.core.MethodParameter;
@@ -33,10 +34,14 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
             return body;
         }
         String message = "success";
+        boolean methodAnnotation = returnType.hasMethodAnnotation(SuccessMessage.class);
+        if (methodAnnotation) {
+            message = returnType.getMethodAnnotation(SuccessMessage.class).value();
+        }
         /* 处理String类型返回值 */
         if (String.class.equals(returnType.getGenericParameterType())) {
             return JSONObject.toJSONString(ResultUtil.success(message, body));
         }
-        return ResultUtil.success("success",body);
+        return ResultUtil.success(message,body);
     }
 }

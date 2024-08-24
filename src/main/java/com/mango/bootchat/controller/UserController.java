@@ -45,4 +45,9 @@ public class UserController {
         return login;
     }
 
+    @RequestMapping(value = "/verifyToken",method = RequestMethod.POST)
+    public LoginUserVo verifyToken(@RequestBody String token) {
+        return sysUserService.verifyToken(token);
+    }
+
 }

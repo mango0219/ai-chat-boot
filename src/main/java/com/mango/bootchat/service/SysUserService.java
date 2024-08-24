@@ -13,4 +13,5 @@ public interface SysUserService extends IService<SysUser> {
     boolean register(SysUser sysUser);
 
     LoginUserVo login(SysUser sysUser);
+    LoginUserVo verifyToken(String token);
 }

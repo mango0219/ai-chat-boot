@@ -40,7 +40,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (StringUtils.isBlank(token)){
             throw new TokenException("Token为空，请重新登陆");
         }
-
         Object o = redisTemplate.opsForValue().get(REDIS_PRE + token);
         if (o == null){
             throw new TokenException("请重新登陆");
