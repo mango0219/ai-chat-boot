@@ -4,10 +4,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mango.bootchat.bo.Media;
+import com.mango.bootchat.ai.Media;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.ai.chat.messages.MessageType;
 
 import java.util.Date;
 import java.util.List;
@@ -28,11 +29,21 @@ public class SysMessage {
     private Date createTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
-    private String messageType;
+    private MessageType messageType;
     private String textContent;
     private List<Media> medias;
     private String sessionId;
 
     @TableField(exist = false)
     private SysSession session;
+
+    public SysMessage(String id, Date createTime, Date updateTime, MessageType messageType, String textContent, List<Media> medias, String sessionId) {
+        this.id = id;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.messageType = messageType;
+        this.textContent = textContent;
+        this.medias = medias;
+        this.sessionId = sessionId;
+    }
 }

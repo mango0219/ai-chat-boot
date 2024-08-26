@@ -4,10 +4,7 @@ import com.mango.bootchat.entity.SysUser;
 import com.mango.bootchat.service.SysUserService;
 import com.mango.bootchat.vo.LoginUserVo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author shihw
@@ -48,6 +45,12 @@ public class UserController {
     @RequestMapping(value = "/verifyToken",method = RequestMethod.POST)
     public LoginUserVo verifyToken(@RequestBody String token) {
         return sysUserService.verifyToken(token);
+    }
+
+    @RequestMapping(value = "/logout/{id}",method = RequestMethod.GET)
+    public String logout(@PathVariable("id") String id) {
+        int logout = sysUserService.logout(id);
+        return "退出成功";
     }
 
 }

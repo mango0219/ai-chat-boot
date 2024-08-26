@@ -25,7 +25,13 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         boolean assignableFrom = returnType.getParameterType().isAssignableFrom(Result.class);
         boolean annotation = returnType.hasMethodAnnotation(NotResponseAdvice.class);
-        return !assignableFrom && !annotation;
+        if (!assignableFrom){
+            return true;
+        }
+        if (!annotation){
+            return true;
+        }
+        return false;
     }
 
     @Override

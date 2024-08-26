@@ -54,7 +54,7 @@ public class SysSessionServiceImpl extends ServiceImpl<SysSessionMapper, SysSess
     @Override
     public String createSession(String userId) {
         String id = IdUtil.simpleUUID();
-        SysSession session = new SysSession(id, new Date(), new Date(), "新建会话", userId);
+        SysSession session = new SysSession(id, new Date(), new Date(), "新建会话-"+IdUtil.simpleUUID().substring(0,7), userId);
         int insert = sysSessionMapper.insert(session);
         if (insert<=0){
             throw new RuntimeException("业务异常");
@@ -70,16 +70,8 @@ public class SysSessionServiceImpl extends ServiceImpl<SysSessionMapper, SysSess
      */
     @Override
     public Integer deleteSession(String sessionId) {
+        int sessionId1 = sysMessageMapper.delete(new QueryWrapper<SysMessage>().eq("session_id", sessionId));
         int i = sysSessionMapper.deleteById(sessionId);
-        if (i>0){
-            int sessionId1 = sysMessageMapper.delete(new QueryWrapper<SysMessage>().eq("session_id", sessionId));
-            if (sessionId1>=0){
-                return 1;
-            }else {
-                throw new RuntimeException("业务异常");
-            }
-        }else{
-            throw new RuntimeException("业务异常");
-        }
+        return 1;
     }
 }

@@ -1,4 +1,4 @@
-package com.mango.bootchat.utils;
+package com.mango.bootchat.system.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

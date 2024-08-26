@@ -16,6 +16,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @Configuration
 @EnableAutoConfiguration(exclude = {RedisVectorStoreAutoConfiguration.class})
+//@EnableConfigurationProperties(RedisVectorStoreProperties.class)
 public class RedisConfig {
     @Bean
     public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory)
@@ -31,4 +32,5 @@ public class RedisConfig {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
+
 }

@@ -14,4 +14,5 @@ public interface SysUserService extends IService<SysUser> {
 
     LoginUserVo login(SysUser sysUser);
     LoginUserVo verifyToken(String token);
+    int logout(String id);
 }

@@ -65,10 +65,10 @@ public class GlobalExceptionHandler {
      * @return {@link Result< String>}
      * @description 异常兜底
      */
-    @ExceptionHandler(value = Exception.class)
-    public Result<String> exception(Exception exception){
-        log.error("[Exception], meessage: {}", exception.getMessage());
-        return ResultUtil.fail("业务异常");
-    }
+    //@ExceptionHandler(value = Exception.class)
+    //public Result<String> exception(Exception exception){
+    //    log.error("[Exception], meessage: {}", exception.getMessage());
+    //    return ResultUtil.fail("业务异常");
+    //}
 
 }

@@ -1,4 +1,4 @@
-package com.mango.bootchat.bo;
+package com.mango.bootchat.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author shihw
- * @date 2024/8/22 09:33
+ * @date 2024/8/24 11:34
  * @description
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Media {
-    private String type;
-    private String data;
+public class MessageDto {
+    private String sessionId;
+    private String userInput;
 }

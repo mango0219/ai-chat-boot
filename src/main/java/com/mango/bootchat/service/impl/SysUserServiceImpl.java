@@ -10,8 +10,8 @@ import com.mango.bootchat.system.exception.ServiceException;
 import com.mango.bootchat.system.exception.UsernameExistException;
 import com.mango.bootchat.system.exception.UsernameOrPasswordErrorException;
 import com.mango.bootchat.system.exception.UsernamePasswordEmptyException;
-import com.mango.bootchat.utils.Base64Utils;
-import com.mango.bootchat.utils.MD5Utils;
+import com.mango.bootchat.system.utils.Base64Utils;
+import com.mango.bootchat.system.utils.MD5Utils;
 import com.mango.bootchat.vo.LoginUserVo;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -117,5 +117,21 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return new LoginUserVo(user.getId(), user.getUsername(), null);
         }
         return null;
+    }
+
+    /**
+     * @author shihw
+     * @date 2024/8/26 17:15
+     * @return {@link int}
+     * @description 退出
+     */
+    @Override
+    public int logout(String id) {
+        String encode = Base64Utils.encode(id);
+        Boolean delete = redisTemplate.delete(REDIS_PRE + encode);
+        if (!delete){
+            throw new RuntimeException("业务异常");
+        }
+        return 1;
     }
 }
